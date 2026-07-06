@@ -22,6 +22,7 @@ This repo is intentionally a standalone vanilla transfer-attack exercise.
 - `BSR` — Chirag Sharma, IIIT Vadodara — *Boosting Adversarial Transferability by Block Shuffle and Rotation* (CVPR 2024)
 - `DECOWA` — Om Singh Rawat, IIT Delhi — *Boosting Adversarial Transferability across Model Genus by Deformation-Constrained Warping* (AAAI 2024)
 - `SIA_MI_TI` — Janhavi Kishor, SRM University — *Structure Invariant Transformation for better Adversarial Transferability* (ICCV 2023), adapted with MI-FGSM and TI-FGSM
+- `SIA` — Aditi Raj, IGDTUW — *Structure Invariant Transformation for better Adversarial Transferability* (ICCV 2023)
 - `OPS` — Kkartik Aggarwal, Delhi Technological University (DTU) — *Boosting Adversarial Transferability through Augmentation in Hypothesis Space* (CVPR 2025)
 - `ATT_CNN` — Keshav Raj, IIIT Delhi — CNN-side ATT-inspired adaptation motivated by *ATT* (NeurIPS 2024)
 - `LI_BOOST_MI` — Charushi, IGDTUW — MI-style logarithmic-shift boosting transfer attack
@@ -102,6 +103,7 @@ Read:
 - `results_student_attacks/bsr/bsr_vs_current_baseline_summary.csv`
 - `results_student_attacks/decowa/README.md`
 - `results_student_attacks/decowa/decowa_vs_current_baseline_summary.csv`
+- `results_student_attacks/sia/README.md`
 - `results_student_attacks/sia_mi_ti/README.md`
 - `results_student_attacks/sia_mi_ti/sia_mi_ti_vs_current_baseline_summary.csv`
 - `results_student_attacks/bpa_cnn/README.md`
