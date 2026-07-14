@@ -10,6 +10,7 @@ Included baseline attacks:
 - MI-ADMIX-DI-TI
 
 Student-contributed attacks now included:
+- PGN
 - BPA_CNN
 - BSR
 - DECOWA

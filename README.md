@@ -19,6 +19,7 @@ This repo is intentionally a standalone vanilla transfer-attack exercise.
 
 ## Completed student-contributed attacks
 - `BPA_CNN` — Om Singh Rawat, IIT Delhi — *Rethinking the Backward Propagation for Adversarial Transferability* (NeurIPS 2023)
+- `PGN` — Chidroopa Kanaparthy, Maharaja Agrasen Institute of Technology (MAIT) — *Boosting Adversarial Transferability by Achieving Flat Local Maxima* (NeurIPS 2023)
 - `BSR` — Chirag Sharma, IIIT Vadodara — *Boosting Adversarial Transferability by Block Shuffle and Rotation* (CVPR 2024)
 - `DECOWA` — Om Singh Rawat, IIT Delhi — *Boosting Adversarial Transferability across Model Genus by Deformation-Constrained Warping* (AAAI 2024)
 - `SIA_MI_TI` — Janhavi Kishor, SRM University — *Structure Invariant Transformation for better Adversarial Transferability* (ICCV 2023), adapted with MI-FGSM and TI-FGSM
@@ -109,6 +110,7 @@ Read:
 - `results_student_attacks/bpa_cnn/README.md`
 - `results_student_attacks/bpa_cnn/bpa_cnn_vs_current_baseline_summary.csv`
 - `results_student_attacks/ops/README.md`
+- `results_student_attacks/pgn/README.md`
 - `results_student_attacks/att_cnn/README.md`
 - `results_student_attacks/att_cnn/att_cnn_vs_current_baseline_summary.csv`
 - `results_student_attacks/li_boost_mi/README.md`
