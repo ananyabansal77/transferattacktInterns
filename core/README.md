@@ -11,6 +11,7 @@ Included baseline attacks:
 
 Student-contributed attacks now included:
 - PGN
+- ADAMSI_FGM
 - BPA_CNN
 - BSR
 - DECOWA
