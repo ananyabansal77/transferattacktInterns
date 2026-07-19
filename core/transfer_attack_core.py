@@ -40,6 +40,7 @@ ALL_ATTACKS = [
     'IDAA',
     'DPA_HMA',
     'DYNAMIC_MORPH',
+    'FPR'
 ]
 
 ATTACK_COLS = {
@@ -62,6 +63,7 @@ ATTACK_COLS = {
     'IDAA': 'idaa_path',
     'DYNAMIC_MORPH': 'dynamic_morph_path',
     'DPA_HMA': 'dpa_hma_path',
+    'FPR': 'fpr_path'
 }
 
 EPSILON = 0.062
@@ -341,6 +343,63 @@ def att_cnn_attack(model, x, tgt_emb, attack_type):
         adv = adv + alpha * tf.sign(g)
         adv = tf.clip_by_value(adv, x - EPSILON, x + EPSILON)
         adv = tf.clip_by_value(adv, -1.0, 1.0)
+
+    return adv
+
+
+# ---------------------------------------------------------
+# FPR (Forward Propagation Refinement) - TensorFlow Adaptation
+# CNN Face Verification Adaptation
+# ---------------------------------------------------------
+
+def fpr_attack(model, x, tgt_emb, attack_type):
+    adv = tf.identity(x)
+    momentum = tf.zeros_like(x)
+    alpha = EPSILON / NUM_ITER
+
+    tgt_emb = tf.nn.l2_normalize(tgt_emb, axis=1)
+
+    previous_embedding = None
+
+    for _ in range(NUM_ITER):
+
+        with tf.GradientTape() as tape:
+            tape.watch(adv)
+
+            emb = compute_embedding(model, adv)
+
+            if previous_embedding is None:
+                refined = emb
+            else:
+                refined = 0.7 * emb + 0.3 * previous_embedding
+
+            refined = tf.nn.l2_normalize(refined, axis=1)
+
+            cosine = tf.reduce_sum(refined * tgt_emb, axis=1)
+
+            loss = attack_loss(cosine, attack_type)
+
+        grad = tape.gradient(loss, adv)
+
+        grad = grad / (tf.reduce_mean(tf.abs(grad)) + 1e-8)
+
+        momentum = DECAY * momentum + grad
+
+        adv = adv + alpha * tf.sign(momentum)
+
+        adv = tf.clip_by_value(
+            adv,
+            x - EPSILON,
+            x + EPSILON
+        )
+
+        adv = tf.clip_by_value(
+            adv,
+            -1.0,
+            1.0
+        )
+
+        previous_embedding = tf.stop_gradient(refined)
 
     return adv
 
@@ -1505,6 +1564,8 @@ def run_attack(attack_name: str, model, src, tgt, attack_type: str, input_size):
         return pgd_attack(model, src, tgt_emb, attack_type)
     if attack_name == 'MI_FGSM':
         return mi_fgsm(model, src, tgt_emb, attack_type)
+    if attack_name == 'FPR':
+        return fpr_attack(model, src, tgt_emb, attack_type)
     if attack_name == 'TI_FGSM':
         return ti_fgsm(model, src, tgt_emb, attack_type)
     if attack_name == 'SI_NI_FGSM':
